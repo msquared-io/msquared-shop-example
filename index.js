@@ -9,7 +9,8 @@ app.use(express.json());
 const baseUrl = "https://api.m2worlds.io"
 const port = process.env.PORT || 3000;
 const apiKey = process.env.API_KEY;
-const organizationId = shopJson.organizationId;
+const organizationId = process.env.ORGANIZATION_ID;
+
 async function postWebPlatform(path, data) {
     const url = `${baseUrl}/${path}`
     return fetch(url, {
