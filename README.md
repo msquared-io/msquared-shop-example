@@ -1,7 +1,5 @@
 # MSquared Shop Example
 
-[![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run)
-
 An example node.js service for buying items from a shop
 
 ## Environment Variables
