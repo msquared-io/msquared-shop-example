@@ -44,13 +44,11 @@ function delegatedAuth(organizationId) {
                 return res.status(401).send('Invalid token');
             }
             req.user = decoded; // Add decoded token to request object
+            if (req.user.organization_id !== organizationId) {
+                return res.status(403).send('Organization ID does not match');
+            }
             next();
         });
-
-        // check organization_id claim in the token
-        if (req.user.organization_id !== organizationId) {
-            return res.status(403).send('Organization ID does not match');
-        }
     }
 }
 

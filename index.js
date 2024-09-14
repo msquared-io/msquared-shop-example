@@ -24,11 +24,14 @@ async function postWebPlatform(path, data) {
     })
 }
 
-app.get('/items', delegatedAuth(organizationId), async (req, res) => {
+app.get('/shop', delegatedAuth(organizationId), async (req, res) => {
+    console.log('User:', req.user.user_id, "asking for items")
     res.json(shopJson);
 });
 
 app.post('/purchase', delegatedAuth(organizationId), async (req, res) => {
+    console.log('User:', req.user.user_id, "attempting to purchase item", req.body.itemId)
+
     const userId = req.user.user_id;
     const itemId = req.body.itemId;
     const itemPrice = shopJson.items[itemId];
@@ -58,6 +61,30 @@ app.post('/purchase', delegatedAuth(organizationId), async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).send('Error processing purchase');
+    }
+});
+
+app.post('/grantCurrency' , delegatedAuth(organizationId), async (req, res) => {
+    console.log('User:', req.user.user_id, "attempting to grant currency", req.body.amount)
+
+    const userId = req.user.user_id;
+    const { amount } = req.body;
+
+    [datasourceId, objectDefinitionId] = shopJson.currency.split('.');
+
+    const grantRequest = [{
+        userId,
+        datasourceId,
+        objectDefinitionId,
+        change: amount
+    }];
+
+    try {
+        await postWebPlatform('api/datasources/transfer', grantRequest);
+        res.json({ message: 'Currency granted' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error granting currency');
     }
 });
 

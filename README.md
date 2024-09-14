@@ -11,13 +11,13 @@ An example node.js application that clients can call
 ## Configuring the shop
 
 Define the object used for currency, and a map
-of listings to prices
+of items to prices
 
 ```
 {
   "currency" : "EFTfrHydl8I3ynkWnsRV.DeburwrKabSxgVbSYz8c",
-  "listings" : {
-    "EFTfrHydl8I3ynkWnsRV.DeburwrKabSxgVbSYz8c" : 100,
+  "items" : {
+    "EFTfrHydl8I3ynkWnsRV.gbOqXWTOYsUxV7zOxskh" : 100,
     "EFTfrHydl8I3ynkWnsRV.U48MEsRbxvbtj60Yp46n" : 200
   }
 }
