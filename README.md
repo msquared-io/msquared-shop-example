@@ -5,7 +5,9 @@ An example node.js service for buying items from a shop
 ## Environment Variables
 
 `PORT` - The port the server will listen on (used by Cloud Run and other PaaS)
+
 `API_KEY` - M2 Server API Key
+
 `ORGANIZATION_ID` - M2 Organization ID
 
 ## Configuring the shop
