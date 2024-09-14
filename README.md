@@ -15,7 +15,6 @@ of listings to prices
 
 ```
 {
-  "organizationId" : "warm-friends-hope-325542",
   "currency" : "EFTfrHydl8I3ynkWnsRV.DeburwrKabSxgVbSYz8c",
   "listings" : {
     "EFTfrHydl8I3ynkWnsRV.DeburwrKabSxgVbSYz8c" : 100,
