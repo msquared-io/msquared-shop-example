@@ -1,6 +1,6 @@
 # MSquared Shop Example
 
-An example node.js application that clients can call
+An example node.js service for buying items from a shop
 
 ## Environment Variables
 
@@ -26,6 +26,11 @@ of items to prices
 ## Running Locally
 
 Set the environment variables and run the following commands:
+
+## Endpoints
+
+`GET /shop` returns the JSON object of the shop - currency and items
+`POST /buy` with a JSON object containing `itemId` and `amount` to purchase an item
 
 ```bash
 npm install

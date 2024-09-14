@@ -29,14 +29,18 @@ app.get('/shop', delegatedAuth(organizationId), async (req, res) => {
     res.json(shopJson);
 });
 
-app.post('/purchase', delegatedAuth(organizationId), async (req, res) => {
-    console.log('User:', req.user.user_id, "attempting to purchase item", req.body.itemId)
+app.post('/buy', delegatedAuth(organizationId), async (req, res) => {
+    console.log('User:', req.user.user_id, "attempting to buy", req.body.amount , "of", req.body.itemId)
 
     const userId = req.user.user_id;
     const itemId = req.body.itemId;
+    const amount = req.body.amount;
     const itemPrice = shopJson.items[itemId];
     if(!itemPrice) {
         return res.status(400).send('Invalid item ID');
+    }
+    if(!amount || amount < 1) {
+        return res.status(400).send('Invalid amount');
     }
 
     [currencyDataSourceId, currencyObjectDefinitionId] = shopJson.currency.split('.');
@@ -46,45 +50,21 @@ app.post('/purchase', delegatedAuth(organizationId), async (req, res) => {
         userId,
         datasourceId: currencyDataSourceId,
         objectDefinitionId: currencyObjectDefinitionId,
-        change: -itemPrice
+        change: -itemPrice * amount
     },
     {
         userId,
         datasourceId: itemDataSourceId,
         objectDefinitionId: itemObjectDefinitionId,
-        change: 1
-    }];
-
-    try {
-        await postWebPlatform('api/datasources/transfer', transferRequest);
-        res.json({ message: 'Purchase successful' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Error processing purchase');
-    }
-});
-
-app.post('/grantCurrency' , delegatedAuth(organizationId), async (req, res) => {
-    console.log('User:', req.user.user_id, "attempting to grant currency", req.body.amount)
-
-    const userId = req.user.user_id;
-    const { amount } = req.body;
-
-    [datasourceId, objectDefinitionId] = shopJson.currency.split('.');
-
-    const grantRequest = [{
-        userId,
-        datasourceId,
-        objectDefinitionId,
         change: amount
     }];
 
     try {
-        await postWebPlatform('api/datasources/transfer', grantRequest);
-        res.json({ message: 'Currency granted' });
+        await postWebPlatform('api/datasources/transfer', transferRequest);
+        res.json({ message: 'Buy successful' });
     } catch (error) {
         console.error(error);
-        res.status(500).send('Error granting currency');
+        res.status(500).send('Error processing buy');
     }
 });
 
