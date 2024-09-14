@@ -29,12 +29,13 @@ of items to prices
 
 Set the environment variables and run the following commands:
 
+```
+npm install
+ORGANIZATION_ID=your-organization-id API_KEY=your-api-key npm start
+```
+
 ## Endpoints
 
 `GET /shop` returns the JSON object of the shop - currency and items
-`POST /buy` with a JSON object containing `itemId` and `amount` to purchase an item
 
-```bash
-npm install
-npm start
-```
+`POST /buy` with a JSON object containing `itemId` and `amount` to purchase an item
