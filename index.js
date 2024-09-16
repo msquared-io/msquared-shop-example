@@ -36,7 +36,7 @@ app.post('/buy', delegatedAuth(organizationId), async (req, res) => {
     const itemId = req.body.itemId;
     const amount = req.body.amount;
     const itemPrice = shopJson.items[itemId];
-    if(!itemPrice) {
+    if(itemPrice === undefined) {
         return res.status(400).send('Invalid item ID');
     }
     if(!amount || amount < 1) {
