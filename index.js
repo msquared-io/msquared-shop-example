@@ -32,8 +32,15 @@ app.get('/shop', delegatedAuth(organizationId), async (req, res) => {
 app.post('/buy', delegatedAuth(organizationId), async (req, res) => {
     console.log('User:', req.user.user_id, "buying", req.body.items.length, "item(s)")
 
-    if(!req.body.items) {
-        return res.status(400).send('No items provided');
+    const userId = req.user.user_id;
+    const itemId = req.body.itemId;
+    const amount = req.body.amount;
+    const itemPrice = shopJson.items[itemId];
+    if(itemPrice === undefined) {
+        return res.status(400).send('Invalid item ID');
+    }
+    if(!amount || amount < 1) {
+        return res.status(400).send('Invalid amount');
     }
 
     let transfers = [];
