@@ -1,6 +1,9 @@
 {
   "currency" : "EFTfrHydl8I3ynkWnsRV.gbOqXWTOYsUxV7zOxskh",
   "items" : {
-    "EFTfrHydl8I3ynkWnsRV.U48MEsRbxvbtj60Yp46n" : 200
+    "EFTfrHydl8I3ynkWnsRV.U48MEsRbxvbtj60Yp46n" : 200,
+    "EFTfrHydl8I3ynkWnsRV.pumElBm3u1qYMVTvnyPg" : 100,
+    "EFTfrHydl8I3ynkWnsRV.DeburwrKabSxgVbSYz8c" : 50,
+    "EFTfrHydl8I3ynkWnsRV.gbOqXWTOYsUxV7zOxskh" : 0
   }
 }

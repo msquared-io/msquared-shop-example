@@ -38,4 +38,17 @@ ORGANIZATION_ID=your-organization-id API_KEY=your-api-key npm start
 
 `GET /shop` returns the JSON object of the shop - currency and items
 
-`POST /buy` with a JSON object containing `itemId` and `amount` to purchase an item
+`POST /buy` with a JSON object of the form
+
+```
+{
+ "items": [{
+   "id": "EFTfrHydl8I3ynkWnsRV.gbOqXWTOYsUxV7zOxskh",
+   "quantity": 1
+ },
+ {
+   "id": "EFTfrHydl8I3ynkWnsRV.U48MEsRbxvbtj60Yp46n",
+   "quantity": 5
+ }]
+}
+```
